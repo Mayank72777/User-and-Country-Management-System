@@ -1,0 +1,590 @@
+{
+	"info": {
+		"_postman_id": "6ab4599d-1a6b-44f1-b2a3-ba583d6c8ced",
+		"name": "USER_MANAGEMENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35119229"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getUserDetails",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYXZpQGdtYWlsLmNvbSIsImlhdCI6MTc0MzQ1NDQ5NSwiZXhwIjoxNzQzNTQwODk1fQ.ASHudLw5EOO4-BrhIowEIILteVfj6WwWEweMbS6XfQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYXZpQGdtYWlsLmNvbSIsImlhdCI6MTc0MzQ1NDQ5NSwiZXhwIjoxNzQzNTQwODk1fQ.ASHudLw5EOO4-BrhIowEIILteVfj6WwWEweMbS6XfQU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Ravi Dalpat singh\",\r\n    \"email\": \"ravi@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnYXVyYXZTQGdtYWlsLmNvbSIsImlhdCI6MTc0Mzc1OTI1OCwiZXhwIjoxNzQzODQ1NjU4fQ.dz8uIEE1XxgV3SLGmTy-Tg98TXPs5XsAC3fdkKYWxIs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW5pc2hAZ21haWwuY29tIiwiaWF0IjoxNzQzNjA3NDAxLCJleHAiOjE3NDM2OTM4MDF9.4DpFJRMi3X5J5lecoG0-rahGtKWiOtGNpYIW55UwytY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"jay@123\",\r\n  \"newPassword\": \"jay@1234\",\r\n  \"confirmPassword\": \"jay@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/update-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthUser",
+			"item": [
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Mayank",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mayank@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "mayank@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginUser",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ravi@gmail.com\",\r\n    \"password\" : \"ravi@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "importAllCountriesFromAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4MTgwNywiZXhwIjoxNzQzNjY4MjA3fQ.XXbPYizapKHnQ7ArA6MKRIKaYNNLrBW34EKdTB_J8EE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/countries/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries",
+								"import"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCountries",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4NzYwMCwiZXhwIjoxNzQzNjc0MDAwfQ.n233SP--qChFcn_s2J0JJu1A985kCiJrj4Db4arx4Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCountryById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4NzYwMCwiZXhwIjoxNzQzNjc0MDAwfQ.n233SP--qChFcn_s2J0JJu1A985kCiJrj4Db4arx4Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/countries/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCountry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4NzYwMCwiZXhwIjoxNzQzNjc0MDAwfQ.n233SP--qChFcn_s2J0JJu1A985kCiJrj4Db4arx4Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n    \"name\": \"India\",\r\n    \"capital\": \"Delhi\",\r\n    \"region\": \"Asia\",\r\n    \"subregion\": \"south Asian\",\r\n    \"population\": 159749763,\r\n    \"flagUrl\": \"https://flagcdn.com/w320/in.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCountry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4NzYwMCwiZXhwIjoxNzQzNjc0MDAwfQ.n233SP--qChFcn_s2J0JJu1A985kCiJrj4Db4arx4Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 251,\r\n    \"name\": \"India\",\r\n    \"capital\": \"Delhi\",\r\n    \"region\": \"South Asia\",\r\n    \"subregion\": \"south Asian\",\r\n    \"population\": 159749763,\r\n    \"flagUrl\": \"https://flagcdn.com/w320/in.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/countries/251",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries",
+								"251"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCountry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBYXJ1QGdtYWlsLmNvbSIsImlhdCI6MTc0MzU4NzYwMCwiZXhwIjoxNzQzNjc0MDAwfQ.n233SP--qChFcn_s2J0JJu1A985kCiJrj4Db4arx4Rg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/countries/251",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"countries",
+								"251"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actuator_Health_CheckUp",
+			"item": [
+				{
+					"name": "ActuatorHealth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActuatorInfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActuatorMetrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActuatorMetrics_JVM_MemoryUse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics/jvm.memory.used",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics",
+								"jvm.memory.used"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActuatorMetrics_CPU_Load",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics/system.cpu.usage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics",
+								"system.cpu.usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActuatorMetrics_HTTP_Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/metrics/http.server.requests",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"metrics",
+								"http.server.requests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
