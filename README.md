@@ -63,3 +63,10 @@ The application uses **MySQL** as the database, **JWT** for basic authentication
   - Swagger UI: http://localhost:8080/swagger-ui.html
 
   - Health Check: http://localhost:8080/actuator/health
+
+##  Postman Collection
+```bash
+- Download the collection: [`user-country-postman-collection.json`](./postman/user-country-postman-collection.json)
+```
+- Import it into Postman to test the APIs quickly.
+
