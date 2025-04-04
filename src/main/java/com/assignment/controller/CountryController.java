@@ -1,7 +1,7 @@
 package com.assignment.controller;
 
 import com.assignment.entity.CountryEntity;
-import com.assignment.service.CountryService;
+import com.assignment.service.CountryServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class CountryController {
 
     @Autowired
-    private CountryService countryService;
+    private CountryServiceImpl countryService;
 
     @Operation(summary = "Fetching data from countries url website and storing it into database")
     @PostMapping("/import")
