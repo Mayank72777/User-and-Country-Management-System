@@ -4,7 +4,7 @@ import com.assignment.dto.PasswordUpdateDto;
 import com.assignment.dto.UserDto;
 import com.assignment.dto.UserUpdateDto;
 import com.assignment.security.JwtUtil;
-import com.assignment.service.UserService;
+import com.assignment.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private JwtUtil jwtUtil;

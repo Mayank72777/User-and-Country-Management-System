@@ -5,7 +5,7 @@ import com.assignment.dto.UserRegisterDto;
 import com.assignment.security.JwtUtil;
 import com.assignment.security.TestSecurityConfig;
 import com.assignment.service.UserDetailsServiceImpl;
-import com.assignment.service.UserService;
+import com.assignment.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class AuthControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @MockBean
     private JwtUtil jwtUtil;

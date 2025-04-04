@@ -3,7 +3,7 @@ package com.assignment.controller;
 import com.assignment.dto.UserLoginDto;
 import com.assignment.dto.UserRegisterDto;
 import com.assignment.security.JwtUtil;
-import com.assignment.service.UserService;
+import com.assignment.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private JwtUtil jwtUtil;
