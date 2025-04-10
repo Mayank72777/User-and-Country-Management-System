@@ -1,17 +1,10 @@
-HELP.md
+##### Java & Build Tool Stuff ######
 target/
-!.mvn/wrapper/maven-wrapper.jar
+build/
 !**/src/main/**/target/
 !**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### IntelliJ IDEA ###
 .idea
@@ -19,18 +12,85 @@ target/
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+### STS ###
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
 ### VS Code ###
 .vscode/
 
-### ENVIRONMENT VARIABLE ###
+#### MAVEN WRAPPER #####
+!.mvn/wrapper/maven-wrapper.jar
+
+#### ENVIRONMENT FILES #######
 .env
+
+
+# Logs
+*.log
+logs/
+spring.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.pid.lock
+
+# Misc
+*.bak
+*.swp
+
+
+#### Swagger JSON/YAML output #####
+swagger-ui.html
+openapi.json
+openapi.yaml
+
+#### Spring actuator custom output ####
+actuator/
+
+
+#=================================================================
+#HELP.md
+#target/
+#!.mvn/wrapper/maven-wrapper.jar
+#!**/src/main/**/target/
+#!**/src/test/**/target/
+
+### STS ###
+#.apt_generated
+#.classpath
+#.factorypath
+#.project
+#.settings
+#.springBeans
+#.sts4-cache
+
+### IntelliJ IDEA ###
+#.idea
+#*.iws
+#*.iml
+#*.ipr
+
+### NetBeans ###
+#/nbproject/private/
+#/nbbuild/
+#/dist/
+#/nbdist/
+#/.nb-gradle/
+#build/
+#!**/src/main/**/build/
+#!**/src/test/**/build/
+
+### VS Code ###
+#.vscode/
+
+### ENVIRONMENT VARIABLE ###
+#.env
