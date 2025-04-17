@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService{
         if(userOpt.isPresent()){
             userRepository.delete(userOpt.get());
         }else{
-            throw new UserNotFoundException("Cannot delete. User not found with email : "+email);
+            throw new UserNotFoundException("Cannot delete. User not found with email: "+email);
         }
 
     }
