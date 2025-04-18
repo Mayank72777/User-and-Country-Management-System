@@ -20,8 +20,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Build Java project and skip tests
-      - name: Build Java project
+      # Build the Java project and generate the JAR file
+      - name: Build with Maven
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION: 86400000
