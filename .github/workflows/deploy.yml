@@ -26,7 +26,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_EXPIRATION: 86400000
         run: |
-          ./mvnw clean package -DskipTests
+          mvnw clean package -DskipTests
 
       # Set up Docker to build images
       - name: Set up Docker
