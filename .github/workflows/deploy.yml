@@ -2,7 +2,8 @@ name: Deploy to Google Compute Engine
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   deploy:
@@ -10,58 +11,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
+      # Checkout code from repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Java and Maven
+      # Set up Java and Maven (used to build the Spring Boot application)
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Build the Java JAR file
+      # Build the application using Maven
       - name: Build with Maven
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          JWT_EXPIRATION: 86400000
+          JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: mvn clean package -DskipTests
 
-      # Set up Docker
+      # Set up Docker Buildx for multi-platform builds (optional)
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
 
-      # Authenticate with Google Cloud
+      # Authenticate with Google Cloud (uses service account key from GitHub Secrets)
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-      # Configure Docker to use gcloud
+      # Configure Docker to use gcloud for authentication
       - name: Configure Docker to use gcloud as a credential helper
         run: |
           gcloud auth configure-docker
 
-      # Build Docker image
+      # Build the Docker image
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_IMAGE }} .
 
-      # Push Docker image to GCR
-      - name: Push Docker image to GCR
+      # Push Docker image to Artifact Registry (GCP)
+      - name: Push Docker image to Artifact Registry
         run: |
           docker push ${{ secrets.DOCKER_IMAGE }}
 
-      # Deploy to GCE via SSH
+      # SSH to GCE instance and deploy the application
       - name: Deploy to GCE via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 34.100.199.27
-          username: ${{ secrets.GCE_SSH_USERNAME }}
-          key: ${{ secrets.GCE_SSH_PRIVATE_KEY }}
+          host: 34.100.149.70 # GCE instance IP
+          username: ${{ secrets.GCE_INSTANCE_USER}}  # SSH Username (use GCE_INSTANCE_USER)
+          key: ${{ secrets.GCE_SSH_PRIVATE_KEY }}  # SSH Private Key
           script: |
+            # Pull the Docker image from Artifact Registry
             docker pull ${{ secrets.DOCKER_IMAGE }}
+
+            # Stop any running container (if exists)
             docker stop myapp || true
             docker rm myapp || true
+
+            # Run the new container
             docker run -d --name myapp -p 8080:8080 ${{ secrets.DOCKER_IMAGE }}
