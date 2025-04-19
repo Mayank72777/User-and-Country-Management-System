@@ -30,8 +30,8 @@ jobs:
         run: mvn clean package -DskipTests
 
       # Set up Docker Buildx for multi-platform builds (optional)
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+#      - name: Set up Docker
+#        uses: docker/setup-buildx-action@v3
 
       # Authenticate with Google Cloud (uses service account key from GitHub Secrets)
       - name: Authenticate with Google Cloud
