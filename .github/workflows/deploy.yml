@@ -49,7 +49,7 @@ jobs:
         run: |
           docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_IMAGE }} .
 
-      # Push Docker image to Artifact Registry (GCP)
+      #Push Docker image to Artifact Registry (GCP)
       - name: Push Docker image to Artifact Registry
         run: |
           docker push ${{ secrets.DOCKER_IMAGE }}
