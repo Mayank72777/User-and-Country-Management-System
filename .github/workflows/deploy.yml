@@ -29,9 +29,9 @@ jobs:
           JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: mvn clean package -DskipTests
 
-      # Set up Docker Buildx for multi-platform builds (optional)
-#      - name: Set up Docker
-#        uses: docker/setup-buildx-action@v3
+      # Set up Docker Buildx for multi-platform builds (optional but necessary for certain setups)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       # Authenticate with Google Cloud (uses service account key from GitHub Secrets)
       - name: Authenticate with Google Cloud
@@ -44,10 +44,10 @@ jobs:
         run: |
           gcloud auth configure-docker
 
-      # Build the Docker image
+      # Build the Docker image (with proper build context)
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_IMAGE }} .
+          docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_IMAGE }} .
 
       # Push Docker image to Artifact Registry (GCP)
       - name: Push Docker image to Artifact Registry
@@ -59,7 +59,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 34.100.149.70 # GCE instance IP
-          username: ${{ secrets.GCE_INSTANCE_USER}}  # SSH Username (use GCE_INSTANCE_USER)
+          username: ${{ secrets.GCE_INSTANCE_USER }}  # SSH Username (use GCE_INSTANCE_USER)
           key: ${{ secrets.GCE_SSH_PRIVATE_KEY }}  # SSH Private Key
           script: |
             # Pull the Docker image from Artifact Registry
