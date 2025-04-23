@@ -1,73 +1,46 @@
-name: Deploy to Google Compute Engine
+name: Deploy to GCE using Docker (Self-hosted Runner)
 
 on:
   push:
     branches:
-      - master
+      - dev
 
 jobs:
   deploy:
-    name: Build & Deploy Docker to GCE
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-      # Checkout code from repository
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      # Set up Java and Maven (used to build the Spring Boot application)
-      - name: Set up JDK
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Build the application using Maven
       - name: Build with Maven
-        env:
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          JWT_EXPIRATION: ${{ secrets.JWT_EXPIRATION }}
         run: mvn clean package -DskipTests
 
-      # Set up Docker Buildx for multi-platform builds (optional but necessary for certain setups)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Build Docker Image
+        run: docker build -t ${{ secrets.DOCKER_IMAGE }} .
 
-      # Authenticate with Google Cloud (uses service account key from GitHub Secrets)
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
-
-      # Configure Docker to use gcloud for authentication
-      - name: Configure Docker to use gcloud as a credential helper
+      - name: Stop and Remove Existing Container (if any)
         run: |
-          gcloud auth configure-docker
+          docker stop user-management-container || true
+          docker rm user-management-container || true
 
-      # Build the Docker image (with proper build context)
-      - name: Build Docker image
+      - name: Run Docker Container with Secrets
         run: |
-          docker buildx build --platform linux/amd64 -t ${{ secrets.DOCKER_IMAGE }} .
-
-      #Push Docker image to Artifact Registry (GCP)
-      - name: Push Docker image to Artifact Registry
-        run: |
-          docker push ${{ secrets.DOCKER_IMAGE }}
-
-      # SSH to GCE instance and deploy the application
-      - name: Deploy to GCE via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: 34.100.149.70 # GCE instance IP
-          username: ${{ secrets.GCE_INSTANCE_USER }}  # SSH Username (use GCE_INSTANCE_USER)
-          key: ${{ secrets.GCE_SSH_PRIVATE_KEY }}  # SSH Private Key
-          script: |
-            # Pull the Docker image from Artifact Registry
-            docker pull ${{ secrets.DOCKER_IMAGE }}
-
-            # Stop any running container (if exists)
-            docker stop myapp || true
-            docker rm myapp || true
-
-            # Run the new container
-            docker run -d --name myapp -p 8080:8080 ${{ secrets.DOCKER_IMAGE }}
+          docker run -d \
+            --name user-management-container \
+            -e SPRING_PROFILES_ACTIVE=prod \
+            -e DB_URL=${{ secrets.DB_URL }} \
+            -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
+            -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            -e JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} \
+            -e SPRINGDOC_API_DOCS_ENABLED=true \
+            -e SPRINGDOC_SWAGGER_UI_ENABLED=true \
+            -p 8080:8080 \
+            ${{ secrets.DOCKER_IMAGE }}
