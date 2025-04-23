@@ -27,19 +27,19 @@ jobs:
 
       - name: Stop and Remove Existing Container (if any)
         run: |
-          docker stop user-management-container || true
-          docker rm user-management-container || true
+          docker stop user-management-container || echo "No running container to stop"
+          docker rm user-management-container || echo "No existing container to remove"
 
       - name: Run Docker Container with Secrets
         run: |
           docker run -d \
             --name user-management-container \
             -e SPRING_PROFILES_ACTIVE=prod \
-            -e DB_URL=${{ secrets.DB_URL }} \
-            -e DB_USERNAME=${{ secrets.DB_USERNAME }} \
-            -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            -e JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} \
+            -e DB_URL="${{ secrets.DB_URL }}" \
+            -e DB_USERNAME="${{ secrets.DB_USERNAME }}" \
+            -e DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+            -e JWT_EXPIRATION="${{ secrets.JWT_EXPIRATION }}" \
             -e SPRINGDOC_API_DOCS_ENABLED=true \
             -e SPRINGDOC_SWAGGER_UI_ENABLED=true \
             -p 8080:8080 \
